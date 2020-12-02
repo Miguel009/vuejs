@@ -3,7 +3,6 @@ app es el id del contenedor usado */
 const app = new Vue({
     el: '#app' ,
     data: {
-        titulo: 'Primeras pruebas de vue',
         Ideas:['Nuevas', 'Hunter', 'RPM', 'Megaforce'],
         Arreglo: [
         {nombre: 'Hunter', estado:'activo', edad:45},
@@ -20,7 +19,8 @@ const app = new Vue({
         } 
         Aunque tambien se puede hacer de esta manera
         */
-       agregarNuevo (){
+       agregarNuevo (e){
+            e.preventDefault();
            /*Para poder agregar datos al arreglo de arriba como no estan tecnicamente en el mismo lugar
            se utiliz la palabra decis para decir que es el arreglo que se encuentra en este espacio de trabajo es decir app */
         this.Arreglo.push({
