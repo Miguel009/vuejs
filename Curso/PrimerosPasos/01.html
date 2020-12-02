@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="css/estilosinde.css">
+</head>
+<body>
+    
+    <!--para poder trabajar con vue todo debe estar entre contenedores entonces en este caso es un div con id app-->
+    <div id="app">
+        <h1 class="text-3xl text-red-400">{{titulo}}</h1>
+        <ul class="list-disc list-inside py-2 rounded-md">
+            <!--Aqui es llamando a un ciclo for y haciendo que en el li se imprimiman todos esos datos que estan en el script 01js y el array se llama Ideas
+            Haciendo que con ide of Ideas se diga que cada elemento de Ideas se va a llamar ide hasta que se termine de recorrer el arreglo-->
+            <h2 class="text-2xl text-red-600">Primer arreglo</h2>
+            <li v-for="ide of Ideas">
+                {{ide}}
+            </li>
+            <h2 class="text-2xl text-red-600">Segundo arreglo con objetos</h2>
+            <li v-for="ar of Arreglo" @click="otroMetodo(ar)">
+                {{ar.nombre}} : {{ar.estado}} edad <input type="number" v-model.number="ar.edad" class="bg-white focus:underline focus:shadow-outline text-emerald-900 appearance-none inline-block w-full border border-emerald-300 rounded py-3 px-4 focus:outline-none">
+                {{
+                    ar.edad >= 18?
+                    "Mayor de Edad":
+                    "Menor de Edad"
+                }}
+                <button class="py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md focus:outline-none" @click="ar.edad++">+</button>
+            </li>
+        </ul>
+        <h2 class="text-2xl text-red-600">Total {{sumaredad}}</h2>
+        <h1 class="text-3xl">Formularios</h1>
+        <!--v-model permite tener interaccion entre el html y el js
+        con @keyup.enter se puede colocar una funcion que queremos que al apretar enter pase-->
+        <input type="text" v-model = "nuevoUsuario">
+        <input type="text" v-model = "nuevoEstado">
+        <input type="number" v-model.number = "nuevoEdad" @keyup.enter="agregarNuevo" >
+        <!--Esta es un forma de llevar el meotod de onclik en vue-->
+        <button v-on:click="agregarNuevo" class="py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md focus:outline-none">Agregado</button>
+        <!--Otra es esta que es mas abreviada-->
+        <button @click="agregarNuevo" class="py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md focus:outline-none">Agregado2</button>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src='js/01.js'></script>
+</html>
