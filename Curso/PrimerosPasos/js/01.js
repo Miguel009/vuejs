@@ -1,5 +1,5 @@
 /*Aqui estamos diciendo que el contenido de nuestro contenedor trabaja con vue y en este caso
-app es el id del contenedor usado */
+app es el id del contenedor usado  cabe recalcar que la variable const puede llamarse como nosotros queramos*/
 const app = new Vue({
     el: '#app' ,
     data: {
@@ -10,7 +10,9 @@ const app = new Vue({
         nuevoUsuario: '',
         nuevoEstado:'Activo',
         nuevoEdad:0,
-        total:0
+        total:0,
+        fondo: 'bg-red-400',
+        color: false
     },
     methods:{
         /* Esta es una forma de llamara a una funcion que se desea

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../../Curso/PrimerosPasos/css/estilosinde.css'>
+</head>
+<body>
+    <div id="crud">
+        <div class="container mx-auto mt-5">
+            <h1 class="text-2xl text-center">{{title}}</h1>
+            <input type="text" class="my-3 p-2 outline-none focus:border-blue-400 border-2 border-gray-500 w-full rounded" v-model="nuevaTarea" v-on:keyup.enter = "agregarTarea">
+            <button class="p-2 bg-green-600 text-white focus:outline-none rounded hover:bg-green-400" @click="agregarTarea">Agregar</button>
+        </div>
+        <div v-for="(item, index) of tareas" class="container mx-auto mt-5 px-6 py-4 border-0 rounded relative mb-4" :class ="item.estado?'bg-blue-400 text-blue-900':'bg-red-400 text-red-900'">
+            <div class="flex flex-row items-center">
+                <div class="flex-grow">
+                  {{index}} - {{item.nombre}} - {{item.estado?"Hecho":"No Hecho"}}
+                </div>
+                <div>
+                    <button class="focus:outline-none px-2 py-1 text-white rounded" :class="item.estado==false?'bg-green-700':'bg-yellow-500'" @click="editarTarea(index)">{{item.estado==false? "Ok":"No"}}</button>
+                    <button class="focus:outline-none bg-red-700 px-3 py-1 text-white rounded" @click="eliminar(index)">X</button>
+                </div>
+            </div>
+          </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src='js/vue.js'></script>
+</html>

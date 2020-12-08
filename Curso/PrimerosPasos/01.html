@@ -50,6 +50,31 @@
                 </div>
             </form>
         </div>
+
+        <h1 class="text-4xl text-gray-400 text-center">Uso de el v-bind Class</h1>
+        <!--Aqui podemos ver que colocando los dos puntos y luego class y si agregamos una clase tambien funciona solo que es necesario colocar los datos de clase dentro de comillas simples porque 
+        las comillas dobles no las reconoce como tal-->
+        <div class="container mx-auto mt-5 bg-red-600 text-black" :class="'p-3'">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus ipsa aliquid labore atque dolorum amet quia voluptates nemo ducimus nihil animi error accusantium deleniti, optio illum asperiores fugit natus dolor?</p>
+        </div>
+        <!--Si queremos agregar mas clases es necesario que se lleven como si fuera un array es decir entre corchetes [] tambien 
+        como se puede ver hay una parte que se llama fondo en el arreglo de :class y esa es una varibale la cual esta en 01.js dentro de vuejs la cual tiene que el fondo sea rojo
+    y como puede ver solo es necesario llamarla para que esta funcione-->
+        <div class="container mx-auto mt-5" :class="['p-3', 'text-white', fondo]">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus ipsa aliquid labore atque dolorum amet quia voluptates nemo ducimus nihil animi error accusantium deleniti, optio illum asperiores fugit natus dolor?</p>
+        </div>
+        <div class="container text-center mx-auto">
+            <input type="text" class="outline-none w-full my-5 py-2 text-black focus:border-gray-600 border-2 border-gray-400" v-model="fondo">
+        </div>
+        <!--Aqui lo que vamos a hacer es ver como hacer un if else por asi decirlo con las clases como se puede ver aqui se ha puesto que si la variable
+        color es igual a verdadero entonces va a poner el bg de color verde sino pues va a ponerlo de color amarillo-->
+        <div class="container mx-auto p-3" :class="{'bg-green-400': color, 'bg-yellow-400': !color}">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus ipsa aliquid labore atque dolorum amet quia voluptates nemo ducimus nihil animi error accusantium deleniti, optio illum asperiores fugit natus dolor?</p>
+        </div>
+        <div class="text-center my-2">
+            <button @click="color=!color" class="bg-blue-400 focus:outline-none hover:bg-blue-300 p-2">Cambiar Fondo de ultimo parrafo</button>
+        </div>
+        
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
