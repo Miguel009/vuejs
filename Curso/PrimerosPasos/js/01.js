@@ -38,9 +38,14 @@ const app = new Vue({
         this.nuevoUsuario = usuario.nombre;
         this.nuevoEstado = usuario.estado;
         this.nuevoEdad = usuario.edad;
+       },
+
+       cambio()
+       {
+        this.color=!this.color
        }
     },
-    /*con computed se realizan lo que son funciones que requieran calculos matematicos cada vez que se modifique el dato numerico en este caso seria edad porque es afectado por su propiedades */
+    /*con computed se realizan lo que son funciones que requieran calculos matematicos cada vez que se modifique el alguna de la variables que estan dentro del computed entonces se activara este metodo para hacer el recalculo */
     computed: {
         sumaredad(){
             this.total = 0;

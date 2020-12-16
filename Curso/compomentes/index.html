@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <div class="container mx-auto" id="app">
+        <!--este es el componente que utilizamos llamado saludo el cual se encueantra
+        abajo de este codigo-->
+        <saludo></saludo>
+        <contador></contador>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src="compo/saludos.js"></script>
+<script src="compo/contador.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            saludo: 'hola vue'
+        }
+    })
+</script>
+</html>
