@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../PrimerosPasos/css/estilosinde.css'>
+</head>
+<body>
+    <div id="app">
+        <titulo></titulo>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<!--Aqui vuex es utilizado mas que todo para el menjo de informacion entre compoenentes padres e hijos de una manera mas ordenada-->
+<script src="https://unpkg.com/vuex@3.6.0/dist/vuex.js"></script>
+<script>
+    Vue.component("titulo",{
+        template: `
+        <div>
+            <h1>numero: {{numero}}</h1>
+            <hijo></hijo>
+        </div>
+        `,
+        /*aqui para evitar colocar lo que es el $store y llamar las variables de manera mas rapida y sencilla es que en la propiedad computed usamos una funcion de vuex llamada 
+        mapState que nos permite traer la variable nada mas por su nombre y luego que se imprima en nuestro template en el mapMutation es igualito*/
+        computed:{
+            ...Vuex.mapState([
+                'numero'
+            ])
+        }
+    })
+
+    Vue.component("hijo", {
+        template: `
+        <div>
+            <h1>numero: {{numero}}</h1>
+            <button class="bg-red-400 rounded px-2" @click="aumentar">+</button>
+            <button class="bg-blue-400 rounded px-2" @click="DataCall">LLamar cursos</button>
+            <ul v-for="item of cursos">
+                <li>{{item.nombre}}</li>
+            </ul>
+        </div>
+        `,
+        computed:{
+            /*aqui como lo que devulete el mapState es un objeto no se puede tener un objeto dentro de otro entonces se resctructura por eso los ...*/
+            ...Vuex.mapState([
+                'numero',
+                'cursos'
+            ])
+        },
+
+        methods:{
+            ...Vuex.mapMutations([
+                'aumentar'
+            ]),
+            ...Vuex.mapActions(['DataCall'])
+        }
+    })
+
+    /*Aqui lo que estamos haciendo es crear ya una instancia de vuex que nos ayudara a manupal datos entre nuestro padre y el hijo*/
+    const store = new Vuex.Store({
+        /*Aqui tenemos lo que es state en donde colocamos los datos que van a poder ser accedidos por los componentes ya que es una variable global y se llamarian de esta forma $store.state.numero*/
+        state: {
+            numero: 0 ,
+            cursos: []
+        },
+        /*aqui podemos ver que en mutations podremos poner los metodos que se desean utilizar y se llamaria de esta forma: $store.commit('aumentar')*/
+        mutations:{
+            aumentar()
+            {
+                this.state.numero++
+            },
+
+            getData(state, cursasos)
+            {
+                this.state.cursos = cursasos
+                console.log( this.state.cursos)
+            }
+        },
+        /*con actions asi como dice su nombre se realiza un accion para luego podet llamar a alguna mutation para que esta pase la info esa es la manera de trabajar de vuex*/
+        actions:{
+            DataCall: async ({commit})=>{
+                const data = await fetch('data.json')
+                const cursos = await data.json()
+                commit('getData', cursos)
+
+            }
+        }
+    })
+
+    //para poder utilizarla tenemos que llamarla en nuestra instancia de la siguiente manera donde deice store y luego el nombre de la variable que ene este caso le dejamos tambien store
+    new Vue({
+        el:'#app',
+        store: store
+    })
+</script>
+</html>
